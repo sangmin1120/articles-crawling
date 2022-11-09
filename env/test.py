@@ -24,21 +24,23 @@ page=driver.find_element(By.XPATH,'//*[@id="lnb"]/div[1]/div/ul/li[2]/a')
 page.click()
 
 news=driver.find_elements(By.CLASS_NAME,'news_tit')
-f=open("articles.txt",'a')
-f.write(datetime.today().strftime('%Y-%m-%d'))
+
+f=open("articles.txt",'a',encoding='utf-8')
+f.write(datetime.today().strftime('%Y-%m-%d '))
 f.write(search+'관련 기사\n')
 
-count=0
+count=0 
 for i in news:
     title=i.text
-    f.write(str(count+1)+title)
+    f.write(str(count+1) +title)
+    f.write('\n')
     count+=1
     if count>5:
         break
 
 
 f.close()   
-time.sleep(5)
+driver.close()
 
 
 # assert "Python" in driver.title
@@ -47,4 +49,4 @@ time.sleep(5)
 # elem.send_keys("pycon")
 # elem.send_keys(Keys.RETURN)
 # assert "No results found." not in driver.page_source
-# driver.clo
+# driver.close()
